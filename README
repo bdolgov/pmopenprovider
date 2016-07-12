@@ -1,0 +1,2 @@
+To install, issue the following command:
+wget https://raw.githubusercontent.com/bdolgov/pmopenprovider/master/installer.sh -O - | bash -

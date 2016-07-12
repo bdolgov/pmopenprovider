@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mgrdata>
+	<plugin name="pmopenprovider">
+		<group>processing_module</group>
+		<author>Boris Dolgov</author>
+		<params>
+			<type name="domain" />
+			<type name="certificate" />
+		</params>
+		<msg name="desc_short" lang="ru">OpenProvider</msg>
+		<msg name="desc_short" lang="en">OpenProvider</msg>
+		<msg name="desc_full" lang="ru">Интеграция с OpenProvider</msg>
+		<msg name="desc_full" lang="en">OpenProvider integration </msg>
+		<msg name="price" lang="ru">Бесплатно</msg>
+		<msg name="price" lang="en">Free</msg>
+	</plugin>
+	<lang name="ru">
+		<messages name="label_processing_modules">
+			<msg name="module_pmopenprovider">OpenProvider Software</msg>
+			<msg name="pmopenprovider">OpenProvider Software</msg>
+		</messages>
+		<messages name="plugin">
+			<msg name="desc_short_pmopenprovider">OpenProvider Software</msg>
+			<msg name="desc_full_pmopenprovider">OpenProvider Software</msg>
+			<msg name="price_pmopenprovider">Free</msg>
+		</messages>
+		<messages name="processing.edit.pmopenprovider">
+			<msg name="url">Url</msg>
+			<msg name="login">Login</msg>
+			<msg name="password">Password</msg>
+			<msg name="hint_url">Url</msg>
+			<msg name="hint_login">Login</msg>
+			<msg name="hint_password">Password</msg>
+		</messages>
+	</lang>
+	<lang name="en">
+		<messages name="label_processing_modules">
+			<msg name="module_pmopenprovider">OpenProvider Software</msg>
+			<msg name="pmopenprovider">OpenProvider Software</msg>
+		</messages>
+		<messages name="plugin">
+			<msg name="desc_short_pmopenprovider">OpenProvider Software</msg>
+			<msg name="desc_full_pmopenprovider">OpenProvider Software</msg>
+			<msg name="price_pmopenprovider">Free</msg>
+		</messages>
+		<messages name="processing.edit.pmopenprovider">
+			<msg name="url">Url</msg>
+			<msg name="login">Login</msg>
+			<msg name="password">Password</msg>
+			<msg name="hint_url">Url</msg>
+			<msg name="hint_login">Login</msg>
+			<msg name="hint_password">Password</msg>
+		</messages>
+	</lang>
+	<metadata name="processing.edit.pmopenprovider" type="form">
+		<form title="name">
+			<page name="connect">
+				<field name="url">
+					<input type="text" name="url" required="yes"/>
+				</field>
+				<field name="login">
+					<input type="text" name="login" required="yes"/>
+				</field>
+				<field name="password">
+					<input type="password" name="password" required="yes"/>
+				</field>
+			</page>
+		</form>
+	</metadata>
+	<library name="pmopenprovider_plugin" />
+	<lang name="en">
+		<messages name="pricelist.certificate">
+			<msg name="op_31">Comodo EssentialSSL</msg>
+			<msg name="op_32">Comodo EssentialSSL Wildcard</msg>
+			<msg name="op_27">Comodo EV SGC SSL</msg>
+			<msg name="op_24">Comodo EV SSL</msg>
+			<msg name="op_33">Comodo EVSSL multi-domain</msg>
+			<msg name="op_25">Comodo Instant SGC SSL</msg>
+			<msg name="op_26">Comodo Instant SGC Wildcard SSL</msg>
+			<msg name="op_20">Comodo InstantSSL</msg>
+			<msg name="op_21">Comodo InstantSSL Pro</msg>
+			<msg name="op_41">Comodo Positive SSL</msg>
+			<msg name="op_40">Comodo Positive SSL multi-domain</msg>
+			<msg name="op_42">Comodo Positive SSL Wildcard</msg>
+			<msg name="op_22">Comodo PremiumSSL</msg>
+			<msg name="op_23">Comodo PremiumSSL Wildcard</msg>
+			<msg name="op_8">GeoTrust QuickSSL Premium</msg>
+			<msg name="op_5">RapidSSL RapidSSL</msg>
+			<msg name="op_6">RapidSSL RapidSSL Wildcard</msg>
+			<msg name="op_1">Symantec Secure Site</msg>
+			<msg name="op_2">Symantec Secure Site Pro</msg>
+			<msg name="op_4">Symantec Secure Site Pro with EV</msg>
+			<msg name="op_3">Symantec Secure Site with EV</msg>
+			<msg name="op_18">thawte SGC SuperCert</msg>
+			<msg name="op_14">thawte SSL 123</msg>
+			<msg name="op_9">GeoTrust True Business ID</msg>
+			<msg name="op_34">GeoTrust True Business ID multi-domain</msg>
+			<msg name="op_11">GeoTrust True Business ID Wildcard</msg>
+			<msg name="op_10">GeoTrust True Business ID with EV</msg>
+			<msg name="op_30">GeoTrust True Business ID with EV multi-domain</msg>
+			<msg name="op_28">Comodo Unified Communications Certificate (UCC)</msg>
+			<msg name="op_15">thawte Web Server</msg>
+			<msg name="op_17">thawte Web Server Wildcard</msg>
+			<msg name="op_16">thawte Web Server with EV</msg>
+		</messages>
+	</lang>
+</mgrdata>
