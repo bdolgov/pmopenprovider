@@ -1027,7 +1027,14 @@ void Openprovider::Import(const int mid, const string& itemtype, const string& s
 		throw mgr_err::Error("unsupported", "itemtype");
 	}
 	StringMap filterParams;
-	str::Split(search, ";", filterParams);
+//	str::Split(search, ";", filterParams);
+	if (search != "")
+	{
+		string tld = search, dom;
+		dom = str::GetWord(tld, '.');
+		filterParams["extension"] = tld;
+		filterParams["domainNamePattern"] = dom;
+	}
 	int current = 0;
 	int total = 1;
 	int LIMIT = 100;
