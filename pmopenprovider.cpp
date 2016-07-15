@@ -769,7 +769,11 @@ std::vector<Openprovider::DomainInfo> Openprovider::Remote_SearchDomain(int limi
 		for (auto j : DomainHandleTypes())
 		{
 			Debug("Getting contact %s", j.c_str());
-			cur.handles[j] = i.FindNode((j == "bill" ? "billing" : j) + "Handle").Str();
+			string handle = i.FindNode((j == "bill" ? "billing" : j) + "Handle").Str();
+			if (handle != "")
+			{
+				cur.handles[j] = handle;
+			}
 		}
 		auto nsNode = i.FindNode("nameServers");
 
