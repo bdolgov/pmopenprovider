@@ -653,7 +653,7 @@ void Openprovider::Remote_CreateDomain(const string& action)
 	{
 		r.AppendChild("period", str::Str(str::Int(params["period"]) / 12));
 		r.AppendChild("useDomicile", "1");
-		r.AppendChild("autorenew", "off");
+		r.AppendChild("autorenew", action == transfer ? "on" : "off");
 	}
 	for (auto i : DomainHandleTypes())
 	{
