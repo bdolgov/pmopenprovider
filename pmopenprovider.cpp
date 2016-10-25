@@ -5,6 +5,7 @@
 #include <mgr/mgrdate.h>
 #include <processing/processingmodule.h>
 #include <processing/certificate_common.h>
+#include <processing/domain_common.h>
 
 using namespace processing;
 using namespace opts;
@@ -17,16 +18,6 @@ MODULE(BINARY_NAME);
 
 namespace
 {
-	struct CertificateModuleArgs2 : public CertificateModuleArgs
-	{
-		opts::Arg Tld;
-		CertificateModuleArgs2():
-			Tld("tld", this, false, false)
-		{
-			Tld.Depends(&Command, "get_contact_type");
-		}
-	};
-
 	static string Get(const mgr_xml::XmlNode& p, const string& field)
 	{
 		auto c = p ? p.FindNode(field) : p;
@@ -81,7 +72,7 @@ namespace processing
 			string StoreContact(const string& extid);
 
 		protected:
-			virtual CertificateModuleArgs2* MakeModuleArgs();
+			virtual RegistratorModuleArgs* MakeModuleArgs();
 			virtual int GetMaxTryCount(const std::string &operation);
 			virtual void InternalAddItemParam(StringMap &params, const int iid);
 
@@ -211,7 +202,7 @@ string processing::Transliterate(const string& arg)
 
 void Openprovider::ProcessCommand()
 {
-	auto c_m_args = dynamic_cast<CertificateModuleArgs2*>(m_args.get());
+	auto c_m_args = dynamic_cast<RegistratorModuleArgs*>(m_args.get());
 	string cmd = c_m_args->Command.AsString();
 
 	if (cmd == PROCESSING_CERTIFICATE_APPROVER)
@@ -290,9 +281,9 @@ void Openprovider::SetParam(const int iid)
 	sbin::ClientQuery("func=service.postsetparam&sok=ok&elid=" + str::Str(iid));
 }
 
-CertificateModuleArgs2* Openprovider::MakeModuleArgs()
+RegistratorModuleArgs* Openprovider::MakeModuleArgs()
 {
-	return new CertificateModuleArgs2();
+	return new RegistratorModuleArgs();
 }
 
 mgr_xml::Xml Openprovider::Remote_GetOpenxml()
