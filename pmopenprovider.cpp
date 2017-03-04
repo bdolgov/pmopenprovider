@@ -72,7 +72,6 @@ namespace processing
 			string StoreContact(const string& extid);
 
 		protected:
-			virtual RegistratorModuleArgs* MakeModuleArgs();
 			virtual int GetMaxTryCount(const std::string &operation);
 			virtual void InternalAddItemParam(StringMap &params, const int iid);
 
@@ -202,7 +201,7 @@ string processing::Transliterate(const string& arg)
 
 void Openprovider::ProcessCommand()
 {
-	auto c_m_args = dynamic_cast<RegistratorModuleArgs*>(m_args.get());
+	auto c_m_args = m_args.get();
 	string cmd = c_m_args->Command.AsString();
 
 	if (cmd == PROCESSING_CERTIFICATE_APPROVER)
@@ -279,11 +278,6 @@ void Openprovider::InternalAddItemParam(StringMap &params, const int iid)
 void Openprovider::SetParam(const int iid)
 {
 	sbin::ClientQuery("func=service.postsetparam&sok=ok&elid=" + str::Str(iid));
-}
-
-RegistratorModuleArgs* Openprovider::MakeModuleArgs()
-{
-	return new RegistratorModuleArgs();
 }
 
 mgr_xml::Xml Openprovider::Remote_GetOpenxml()
