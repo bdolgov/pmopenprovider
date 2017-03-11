@@ -970,11 +970,13 @@ void Openprovider::SyncItem(int iid)
 
 mgr_xml::Xml Openprovider::GetContactType(const string& tld)
 {
+	static std::set<string> ru_tld{"ru", "su", "рф", "xn--p1ai", "com.ru", "net.ru", "pp.ru"};
+	string type = ru_tld.count(tld) ? "default" : "global";
 	mgr_xml::Xml xml;
 	xml.GetRoot().SetProp("auth_code", "require").SetProp("ns", "require");
 	for (auto i : DomainHandleTypes())
 	{
-		xml.GetRoot().AppendChild("contact_type", i);
+		xml.GetRoot().AppendChild("contact_type", i).SetProp("type", type);
 	}
 	return xml;
 }
