@@ -98,7 +98,7 @@ namespace processing
 			mgr_xml::Xml ApproverList(const int mid, const string& domain, const string& intname);
 			void SyncItem(int) override;
 			mgr_xml::Xml GetContactType(const string& tld);
-			void UpdateNs(int);
+			void UpdateNS(int) override;
 			void Import(const int mid, const string& itemtype, const string& search) override;
 			void Transfer(int iid, StringMap&);
 	};
@@ -225,7 +225,7 @@ void Openprovider::ProcessCommand()
 	}
 	else if (cmd == "update_ns")
 	{
-		UpdateNs(str::Int(c_m_args->Item));
+		UpdateNS(str::Int(c_m_args->Item));
 	}
 	else if (cmd == "import")
 	{
@@ -999,7 +999,7 @@ void Openprovider::RegisterDomainContacts()
 	}
 }
 
-void Openprovider::UpdateNs(int iid)
+void Openprovider::UpdateNS(int iid)
 {
 	Init(iid);
 	Remote_CreateDomain("modify");
