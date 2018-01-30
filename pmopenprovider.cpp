@@ -829,7 +829,10 @@ void Openprovider::Init(int iid)
 	itemtype = item_query->AsString("intname");
 	pricelist = item_query->AsString("pricelist_intname");
 	SetModule(item_query->AsInt("processingmodule"));
-	AddItemParam(params, iid);
+	// Was removed in billmgr-5.137.
+	// AddItemParam(params, iid);
+	params = GetItemParams(iid);
+	InternalAddItemParam(params, iid);
 	AddItemAddon(params, iid, item_query->AsInt("pricelist"));
 	if (itemtype == "certificate")
 	{
