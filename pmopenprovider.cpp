@@ -539,6 +539,10 @@ Openprovider::OrderInfo Openprovider::Remote_GetDomain(const string& domainName)
 	return ret;
 }
 
+string SafeSubstr(const string &s, size_t begin, size_t end = string::npos) {
+	return s.size() > begin ? s.substr(begin, end) : string();
+}
+
 string Openprovider::Remote_CreateDomainCustomer(const string& prefix)
 {
 	auto q = Remote_GetOpenxml();
@@ -548,11 +552,11 @@ string Openprovider::Remote_CreateDomainCustomer(const string& prefix)
 		r.AppendChild("companyName", params[prefix + "_company"]);
 	}
 	auto address = r.AppendChild("address");
-	address.AppendChild("country", CountryCode(params[prefix + "_postal_country"]));
-	address.AppendChild("state", params[prefix + "_postal_state"]);
-	address.AppendChild("city", params[prefix + "_postal_city"]);
-	address.AppendChild("zipcode", params[prefix + "_postal_postcode"]);
-	AddAddress(params[prefix + "_postal_address"], address);
+	address.AppendChild("country", CountryCode(params[prefix + "_location_country"]));
+	address.AppendChild("state", params[prefix + "_location_state"]);
+	address.AppendChild("city", params[prefix + "_location_city"]);
+	address.AppendChild("zipcode", params[prefix + "_location_postcode"]);
+	AddAddress(params[prefix + "_location_address"], address);
 	AddName(params[prefix + "_firstname"], params[prefix + "_lastname"], r);
 	AddPhone(params[prefix + "_phone"], r);
 	r.AppendChild("email", params[prefix + "_email"]);
@@ -576,8 +580,8 @@ string Openprovider::Remote_CreateDomainCustomer(const string& prefix)
 			data.AppendChild("firstNameLatin", params[prefix + "_firstname"]);
 			data.AppendChild("middleNameLatin", params[prefix + "_middlename"]);
 			data.AppendChild("lastNameLatin", params[prefix + "_lastname"]);
-			data.AppendChild("passportSeries", params[prefix + "_passport_ru"].substr(0, 5));
-			data.AppendChild("passportNumber", params[prefix + "_passport_ru"].substr(5));
+			data.AppendChild("passportSeries", SafeSubstr(params[prefix + "_passport_ru"], 0, 5));
+			data.AppendChild("passportNumber", SafeSubstr(params[prefix + "_passport_ru"], 5));
 			data.AppendChild("passportIssuer", params[prefix + "_passport_org_ru"]);
 			data.AppendChild("passportIssueDate", params[prefix + "_passport_date"]);
 			data.AppendChild("birthDate", params[prefix + "_birthdate"]);
@@ -588,12 +592,12 @@ string Openprovider::Remote_CreateDomainCustomer(const string& prefix)
 			data.AppendChild("сompanyNameLatin", params[prefix + "_company"]);
 			data.AppendChild("taxPayerNumber", params[prefix + "_inn"]);
 			data.AppendChild("postalAddressCyrillic", 
-				CountryNameRu(params[prefix + "_postal_country"]) +
-				" " + params[prefix + "_postal_postcode"] +
-				" " + params[prefix + "_postal_state_ru"] +
-				" " + params[prefix + "_postal_city_ru"] +
-				" " + params[prefix + "_postal_address_ru"] +
-				" " + params[prefix + "_postal_addressee_ru"]);
+				CountryNameRu(params[prefix + "_location_country"]) +
+				" " + params[prefix + "_location_postcode"] +
+				" " + params[prefix + "_location_state_ru"] +
+				" " + params[prefix + "_location_city_ru"] +
+				" " + params[prefix + "_location_address_ru"] +
+				" " + params[prefix + "_location_addressee_ru"]);
 		}
 		data.AppendChild("mobilePhoneNumber", params[prefix + "_phone"]);
 		data.AppendChild("legalAddressCyrillic", 
@@ -832,6 +836,7 @@ void Openprovider::Init(int iid)
 	// Was removed in billmgr-5.137.
 	// AddItemParam(params, iid);
 	params = GetItemParams(iid);
+	params["processingmodule"] = item_query->AsString("processingmodule");
 	InternalAddItemParam(params, iid);
 	AddItemAddon(params, iid, item_query->AsInt("pricelist"));
 	if (itemtype == "certificate")
